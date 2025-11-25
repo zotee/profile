@@ -10,6 +10,12 @@ import Contact from '../Contact/Contact';
 import me from "../../assets/me.jpeg"
 
 const Home = () => {
+  // Add this to check if image loads
+  const handleImageError = (e) => {
+    console.error('Image failed to load:', e.target.src);
+    e.target.style.backgroundColor = '#ccc'; // Fallback color
+  };
+
   return (
     <>
       <Header />
@@ -40,7 +46,11 @@ const Home = () => {
             </div>
             <div className="home-image">
               <div className="profile-image">
-                <img src={me} alt="Jyoti Sah" />
+                <img 
+                  src={me} 
+                  alt="Jyoti Sah" 
+                  onError={handleImageError}
+                />
               </div>
             </div>
           </div>

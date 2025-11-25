@@ -9,67 +9,84 @@ const Projects = () => {
     {
       id: 1,
       title: 'E-Commerce Platform',
-      description: 'A full-stack e-commerce solution with React and Node.js',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-      github: 'https://github.com',
-      demo: 'https://demo.com',
-      image: '/project1.jpg'
+      description: 'A full-stack e-commerce solution with React, Node.js, and MongoDB featuring user authentication, product management, shopping cart, and secure payment integration with Stripe.',
+      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Express'],
+      github: 'https://github.com/zotee',
+      demo: 'https://botslabnepal.com/',
+      image: '/project1.jpg',
+      featured: true
     },
     {
       id: 2,
-      title: 'Task Management App',
-      description: 'A collaborative task management application',
-      technologies: ['React', 'Firebase', 'Material-UI'],
-      github: 'https://github.com',
-      demo: 'https://demo.com',
-      image: '/project2.jpg'
+      title: 'Hospital Management System',
+      description: 'A comprehensive hospital website with appointment scheduling, doctor profiles, service information, and patient portal for seamless healthcare management.',
+      technologies: ['React', 'Firebase', 'Material-UI', 'Node.js'],
+      github: 'https://github.com/zotee',
+      demo: 'https://www.goldenhospital.com.np/',
+      image: '/project2.jpg',
+      featured: true
     },
-    {
-      id: 3,
-      title: 'Weather Dashboard',
-      description: 'Real-time weather information dashboard',
-      technologies: ['JavaScript', 'API', 'CSS3'],
-      github: 'https://github.com',
-      demo: 'https://demo.com',
-      image: '/project3.jpg'
-    }
+   
   ];
 
   return (
     <>
-<Header/>
-    <section id="projects" className="projects">
-      <div className="container">
-        <h2 className="section-title">My Projects</h2>
-        <div className="projects-grid">
-          {projects.map(project => (
-            <div key={project.id} className="project-card">
-              <div className="project-image">
-                <img src={project.image} alt={project.title} />
-              </div>
-              <div className="project-content">
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                <div className="project-technologies">
-                  {project.technologies.map((tech, index) => (
-                    <span key={index} className="tech-tag">{tech}</span>
-                  ))}
+      <Header />
+      <section id="projects" className="projects">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">My Projects</h2>
+            <p className="section-subtitle">Here are some of my recent works that showcase my skills and experience</p>
+          </div>
+          
+          <div className="projects-grid">
+            {projects.map(project => (
+              <div key={project.id} className={`project-card ${project.featured ? 'featured' : ''}`}>
+                <div className="project-image">
+                  <img src={project.image} alt={project.title} />
+                  <div className="project-overlay">
+                    <div className="project-links">
+                      <a 
+                        href={project.github} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="project-link github"
+                      >
+                        <i className="fab fa-github"></i>
+                        Code
+                      </a>
+                      <a 
+                        href={project.demo} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="project-link demo"
+                      >
+                        <i className="fas fa-external-link-alt"></i>
+                        Live Demo
+                      </a>
+                    </div>
+                  </div>
+                  {project.featured && <div className="featured-badge">Featured</div>}
                 </div>
-                <div className="project-links">
-                  <a href={project.github} target="_blank" rel="noopener noreferrer">
-                    GitHub
-                  </a>
-                  <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                    Live Demo
-                  </a>
+                
+                <div className="project-content">
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                  
+                  <div className="project-technologies">
+                    {project.technologies.map((tech, index) => (
+                      <span key={index} className="tech-tag">{tech}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          
+        
         </div>
-      </div>
-    </section>
-
+      </section>
+  
     </>
   );
 };

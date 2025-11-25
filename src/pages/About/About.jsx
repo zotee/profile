@@ -29,11 +29,11 @@ const About = () => {
               </div>
               <div className="detail-item">
                 <strong>Email:</strong>
-                <span>jyoti@example.com</span>
+                <span>jyotishahqwerty@gmail.com</span>
               </div>
               <div className="detail-item">
                 <strong>Location:</strong>
-                <span>Your City, Country</span>
+                <span>Kathmandu, Country</span>
               </div>
               <div className="detail-item">
                 <strong>Availability:</strong>
@@ -43,17 +43,14 @@ const About = () => {
           </div>
           <div className="about-stats">
             <div className="stat">
-              <h3>2+</h3>
+              <h3>1+</h3>
               <p>Years Experience</p>
             </div>
             <div className="stat">
-              <h3>50+</h3>
+              <h3>5+</h3>
               <p>Projects Completed</p>
             </div>
-            <div className="stat">
-              <h3>10+</h3>
-              <p>Happy Clients</p>
-            </div>
+            
           </div>
         </div>
       </div>

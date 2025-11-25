@@ -1,10 +1,11 @@
 // src/components/Header.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import './header.css';
+import './Header.css';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
   const toggleMenu = () => {
@@ -19,8 +20,36 @@ const Header = () => {
     return location.pathname === path;
   };
 
+  // Check if current page is home page
+  const isHomePage = location.pathname === '/';
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      // If on home page, only show background when scrolled
+      // If on other pages, always show background
+      if (isHomePage) {
+        if (scrollTop > 100) {
+          setIsScrolled(true);
+        } else {
+          setIsScrolled(false);
+        }
+      } else {
+        setIsScrolled(true); // Always colored on other pages
+      }
+    };
+
+    // Set initial state based on current page
+    if (!isHomePage) {
+      setIsScrolled(true);
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isHomePage]);
+
   return (
-    <header className="header">
+    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container">
         <div className="logo">
           <Link to="/" onClick={closeMenu}>
