@@ -1,6 +1,6 @@
 /* src/components/Footer.css */
 .footer {
-  background: linear-gradient(135deg, rgba(44, 62, 80, 1) 0%, rgba(52, 73, 94, 1) 100%);
+  background: #132743;
   color: white;
   padding: 3rem 0 1rem;
   position: relative;
