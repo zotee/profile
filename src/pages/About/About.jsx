@@ -33,7 +33,7 @@ const About = () => {
               </div>
               <div className="detail-item">
                 <strong>Location:</strong>
-                <span>Kathmandu, Country</span>
+                <span>Kathmandu, Nepal</span>
               </div>
               <div className="detail-item">
                 <strong>Availability:</strong>

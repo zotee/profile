@@ -26,8 +26,6 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      // If on home page, only show background when scrolled
-      // If on other pages, always show background
       if (isHomePage) {
         if (scrollTop > 100) {
           setIsScrolled(true);
@@ -35,11 +33,10 @@ const Header = () => {
           setIsScrolled(false);
         }
       } else {
-        setIsScrolled(true); // Always colored on other pages
+        setIsScrolled(true);
       }
     };
 
-    // Set initial state based on current page
     if (!isHomePage) {
       setIsScrolled(true);
     }
@@ -49,11 +46,18 @@ const Header = () => {
   }, [isHomePage]);
 
   return (
-    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+    <header className={`header ${isScrolled ? 'scrolled' : ''} ${isMenuOpen ? 'menu-open' : ''}`}>
       <div className="container">
-        <div className="logo">
+        <div className="log">
           <Link to="/" onClick={closeMenu}>
-            <h2>Jyoti Sah</h2>
+            <div className="log-container">
+              <div className="log-shape">
+                <span className="log-j">Jyoti</span>
+             
+                <span className="log-sah">Sah</span>
+                <div className="log-dot"></div>
+              </div>
+            </div>
           </Link>
         </div>
         
@@ -62,52 +66,62 @@ const Header = () => {
             <li>
               <Link 
                 to="/" 
-                className={isActiveLink('/') ? 'active' : ''}
+                className={`nav-link ${isActiveLink('/') ? 'active' : ''}`}
                 onClick={closeMenu}
               >
-                Home
+                <span className="nav-icon">🏠</span>
+                <span className="nav-text">Home</span>
+                <span className="nav-underline"></span>
               </Link>
             </li>
             <li>
               <Link 
                 to="/about" 
-                className={isActiveLink('/about') ? 'active' : ''}
+                className={`nav-link ${isActiveLink('/about') ? 'active' : ''}`}
                 onClick={closeMenu}
               >
-                About
+                <span className="nav-icon">👤</span>
+                <span className="nav-text">About</span>
+                <span className="nav-underline"></span>
               </Link>
             </li>
             <li>
               <Link 
                 to="/skills" 
-                className={isActiveLink('/skills') ? 'active' : ''}
+                className={`nav-link ${isActiveLink('/skills') ? 'active' : ''}`}
                 onClick={closeMenu}
               >
-                Skills
+                <span className="nav-icon">⚡</span>
+                <span className="nav-text">Skills</span>
+                <span className="nav-underline"></span>
               </Link>
             </li>
             <li>
               <Link 
                 to="/projects" 
-                className={isActiveLink('/projects') ? 'active' : ''}
+                className={`nav-link ${isActiveLink('/projects') ? 'active' : ''}`}
                 onClick={closeMenu}
               >
-                Projects
+                <span className="nav-icon">💼</span>
+                <span className="nav-text">Projects</span>
+                <span className="nav-underline"></span>
               </Link>
             </li>
             <li>
               <Link 
                 to="/contact" 
-                className={isActiveLink('/contact') ? 'active' : ''}
+                className={`nav-link ${isActiveLink('/contact') ? 'active' : ''}`}
                 onClick={closeMenu}
               >
-                Contact
+                <span className="nav-icon">📞</span>
+                <span className="nav-text">Contact</span>
+                <span className="nav-underline"></span>
               </Link>
             </li>
           </ul>
         </nav>
 
-        <button className="menu-toggle" onClick={toggleMenu}>
+        <button className={`menu-toggle ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
           <span></span>
           <span></span>
           <span></span>

@@ -2,7 +2,8 @@
 import React from 'react';
 import './Projects.css';
 import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
+import botslab from '../../assets/banner1.webp';
+import hospital from '../../assets/hospital.jpeg';
 
 const Projects = () => {
   const projects = [
@@ -13,7 +14,7 @@ const Projects = () => {
       technologies: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Express'],
       github: 'https://github.com/zotee',
       demo: 'https://botslabnepal.com/',
-      image: '/project1.jpg',
+      image: botslab, // Using imported image
       featured: true
     },
     {
@@ -23,10 +24,9 @@ const Projects = () => {
       technologies: ['React', 'Firebase', 'Material-UI', 'Node.js'],
       github: 'https://github.com/zotee',
       demo: 'https://www.goldenhospital.com.np/',
-      image: '/project2.jpg',
+      image: hospital, // Using imported image
       featured: true
     },
-   
   ];
 
   return (
@@ -82,11 +82,8 @@ const Projects = () => {
               </div>
             ))}
           </div>
-          
-        
         </div>
       </section>
-  
     </>
   );
 };
