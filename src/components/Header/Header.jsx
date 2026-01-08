@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
+import logoImage from '../../assets/diya.jpeg'; // Adjust the path based on your file structure
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -48,15 +49,25 @@ const Header = () => {
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''} ${isMenuOpen ? 'menu-open' : ''}`}>
       <div className="container">
-        <div className="log">
+        <div className="logo">
           <Link to="/" onClick={closeMenu}>
-            <div className="log-container">
-              <div className="log-shape">
-                <span className="log-j">Jyoti</span>
-             
-                <span className="log-sah">Sah</span>
-                <div className="log-dot"></div>
-              </div>
+            <div className="logo-container">
+              <img 
+                src={logoImage} 
+                alt="Jyoti Sah Logo" 
+                className="logo-image"
+                onError={(e) => {
+                  console.error('Logo image failed to load');
+                  e.target.style.display = 'none';
+                  // Fallback to text if image fails
+                  e.target.parentNode.innerHTML = `
+                    <div class="logo-fallback">
+                      <span class="logo-j">Jyoti</span>
+                      <span class="logo-sah">Sah</span>
+                    </div>
+                  `;
+                }}
+              />
             </div>
           </Link>
         </div>

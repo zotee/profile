@@ -14,7 +14,7 @@ const Projects = () => {
       technologies: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Express'],
       github: 'https://github.com/zotee',
       demo: 'https://botslabnepal.com/',
-      image: botslab, // Using imported image
+      image: botslab,
       featured: true
     },
     {
@@ -24,7 +24,7 @@ const Projects = () => {
       technologies: ['React', 'Firebase', 'Material-UI', 'Node.js'],
       github: 'https://github.com/zotee',
       demo: 'https://www.goldenhospital.com.np/',
-      image: hospital, // Using imported image
+      image: hospital,
       featured: true
     },
   ];
@@ -34,10 +34,11 @@ const Projects = () => {
       <Header />
       <section id="projects" className="projects">
         <div className="container">
-          <div className="section-header">
-            <h2 className="section-title">My Projects</h2>
-            <p className="section-subtitle">Here are some of my recent works that showcase my skills and experience</p>
-          </div>
+          <h2 className="section-title">
+            <span className="title-text">My Projects</span>
+            <span className="title-underline"></span>
+          </h2>
+          <p className="section-subtitle">Here are some of my recent works that showcase my skills and experience</p>
           
           <div className="projects-grid">
             {projects.map(project => (
