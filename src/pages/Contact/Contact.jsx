@@ -43,6 +43,7 @@ const Contact = () => {
                 I'm always interested in new opportunities and collaborations. 
                 Feel free to reach out if you'd like to work together!
               </p>
+              
               <div className="contact-details">
                 <div className="contact-item">
                   <div className="contact-icon">📧</div>
@@ -67,6 +68,7 @@ const Contact = () => {
                 </div>
               </div>
             </div>
+            
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-group">
                 <input

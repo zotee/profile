@@ -70,14 +70,23 @@
   gap: 60px;
   max-width: 1200px;
   margin: 0 auto;
-  align-items: start;
+  align-items: stretch;
 }
 
-.contact-info {
+/* Make both columns equal height */
+.contact-info,
+.contact-form {
   background: white;
   padding: 40px;
   border-radius: 16px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.contact-info {
+  justify-content: space-between;
 }
 
 .contact-info h3 {
@@ -92,12 +101,14 @@
   line-height: 1.7;
   color: #666;
   margin-bottom: 40px;
+  flex-grow: 0;
 }
 
 .contact-details {
   display: flex;
   flex-direction: column;
   gap: 25px;
+  margin-top: auto;
 }
 
 .contact-item {
@@ -127,11 +138,13 @@
   background: linear-gradient(135deg, #3498db, #2980b9);
   color: white;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .contact-text {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 }
 
 .contact-text strong {
@@ -147,15 +160,45 @@
   font-weight: 500;
 }
 
+/* Contact Form Styling */
 .contact-form {
-  background: white;
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .form-group {
-  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Name and Email fields */
+.contact-form .form-group:first-of-type,
+.contact-form .form-group:nth-of-type(2) {
+  margin-bottom: 20px;
+}
+
+/* Message field - Fill all available space */
+.contact-form .form-group:nth-of-type(3) {
+  flex: 1; /* This makes the message field take all available space */
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form .form-group:nth-of-type(3) textarea {
+  flex: 1; /* Make textarea fill the form-group container */
+  width: 100%;
+  padding: 18px 20px;
+  border: 2px solid #f0f4ff;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background: #f8f9ff;
+  color: #2c3e50;
+  resize: vertical;
+  min-height: 150px; /* Minimum height */
 }
 
 .form-group input,
@@ -196,6 +239,8 @@
   cursor: pointer;
   transition: all 0.3s ease;
   letter-spacing: 0.5px;
+  margin-top: auto;
+  flex-shrink: 0; /* Prevent button from shrinking */
 }
 
 .btn-primary:hover {
@@ -219,6 +264,22 @@
   .contact-info,
   .contact-form {
     padding: 35px;
+    height: auto;
+  }
+  
+  .contact-details {
+    margin-top: 40px;
+  }
+  
+  /* Reset flex properties on mobile for message field */
+  .contact-form .form-group:nth-of-type(3) {
+    flex: none;
+    margin-bottom: 20px;
+  }
+  
+  .contact-form .form-group:nth-of-type(3) textarea {
+    flex: none;
+    min-height: 180px; /* Slightly taller on tablet */
   }
 }
 
@@ -241,6 +302,17 @@
   }
   
   .contact-info p {
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+  
+  .contact-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.8rem;
+  }
+  
+  .contact-text span {
     font-size: 1rem;
   }
 }
@@ -269,15 +341,18 @@
     padding: 25px;
   }
   
-  .contact-icon {
-    width: 50px;
-    height: 50px;
-    font-size: 1.8rem;
+  .contact-item {
+    padding: 15px;
+    gap: 15px;
   }
   
   .form-group input,
   .form-group textarea {
     padding: 15px;
+  }
+  
+  .contact-form .form-group:nth-of-type(3) textarea {
+    min-height: 150px;
   }
   
   .btn-primary {
@@ -295,7 +370,6 @@
     flex-direction: column;
     text-align: center;
     gap: 15px;
-    padding: 15px;
   }
   
   .contact-icon {
@@ -308,8 +382,9 @@
     align-items: center;
   }
   
+  .contact-text strong,
   .contact-text span {
-    font-size: 1rem;
+    text-align: center;
   }
   
   .form-group {
@@ -319,5 +394,13 @@
   .form-group input,
   .form-group textarea {
     padding: 12px 15px;
+  }
+  
+  .contact-form .form-group:nth-of-type(3) textarea {
+    min-height: 120px;
+  }
+  
+  .contact-details {
+    margin-top: 30px;
   }
 }
