@@ -32,55 +32,10 @@
   gap: 1rem;
 }
 
-.logo-shape {
-  position: relative;
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #3498db, #9b59b6);
-  border-radius: 50% 20% 50% 50%;
-  transform: rotate(45deg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-  transition: all 0.3s ease;
-}
 
-.logo-shape:hover {
-  transform: rotate(45deg) scale(1.1);
-  border-radius: 40% 50% 40% 40%;
-}
 
-.logo-inner {
-  transform: rotate(-45deg);
-  color: white;
-  font-weight: bold;
-  font-size: 1.2rem;
-  position: relative;
-}
 
-.logo-j {
-  position: absolute;
-  top: -8px;
-  left: -8px;
-}
 
-.logo-s {
-  position: absolute;
-  bottom: -8px;
-  right: -8px;
-}
-
-.logo-dot {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  width: 8px;
-  height: 8px;
-  background: #e74c3c;
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
 
 @keyframes pulse {
   0%, 100% { transform: scale(1); opacity: 1; }

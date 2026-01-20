@@ -1,192 +1,131 @@
-// src/components/Home.jsx
-import React, { useState, useEffect, useRef } from 'react';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
-import './Home.css';
-import About from '../About/About';
-import Skill from '../Skills/Skill';
-import Projects from '../Projects/Projects';
-import Contact from '../Contact/Contact';
+import React, { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
+import "./Home.css";
+import About from "../About/About";
+import Skill from "../Skills/Skill";
+import Projects from "../Projects/Projects";
+import Contact from "../Contact/Contact";
 import me from "../../assets/me.jpeg";
+
+/* ================= ANIMATIONS ================= */
+
+const textContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 }
+  }
+};
+
+const textItem = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+};
 
 const Home = () => {
   const [chatOpen, setChatOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { id: 1, text: "Hi! I'm Jyoti. How can I help you today?", sender: 'bot', timestamp: new Date() }
+    { id: 1, text: "Hi! I'm Jyoti. How can I help you today?", sender: "bot", timestamp: new Date() }
   ]);
-  const [inputMessage, setInputMessage] = useState('');
+  const [inputMessage, setInputMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
-
-  const handleImageError = (e) => {
-    console.error('Image failed to load:', e.target.src);
-    e.target.style.backgroundColor = '#ccc';
-  };
 
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (!inputMessage.trim()) return;
 
-    // Add user message
-    const userMessage = {
-      id: messages.length + 1,
+    setMessages(prev => [...prev, {
+      id: prev.length + 1,
       text: inputMessage,
-      sender: 'user',
+      sender: "user",
       timestamp: new Date()
-    };
-    setMessages([...messages, userMessage]);
-    setInputMessage('');
+    }]);
+
+    setInputMessage("");
     setIsTyping(true);
 
-    // Simulate bot response after 1-2 seconds
     setTimeout(() => {
-      const botResponses = [
-        "Thanks for your message! I'll get back to you soon.",
-        "That's interesting! Tell me more about it.",
-        "I'd love to discuss this further. You can also email me at jyotishahqwerty@gmail.com",
-        "Great question! I have experience with that. Would you like to see my projects?",
-        "I'm currently available for new opportunities. Let's connect!"
-      ];
-      
-      const botMessage = {
-        id: messages.length + 2,
-        text: botResponses[Math.floor(Math.random() * botResponses.length)],
-        sender: 'bot',
+      setMessages(prev => [...prev, {
+        id: prev.length + 1,
+        text: "Thanks for your message! Let's connect soon.",
+        sender: "bot",
         timestamp: new Date()
-      };
-      
-      setMessages(prev => [...prev, botMessage]);
+      }]);
       setIsTyping(false);
-    }, 1000 + Math.random() * 1000);
-  };
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 1200);
   };
 
   useEffect(() => {
-    scrollToBottom();
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   return (
     <>
       <Header />
+
       <section id="home" className="home">
         <div className="container">
           <div className="home-content">
-            <div className="home-text">
-              <h1>Hello, I'm <span className="highlight">Jyoti Sah</span></h1>
-              <h2>Full Stack Developer</h2>
-              <p>
-                I create beautiful and functional web applications 
-                with modern technologies and best practices.
-              </p>
-              <div className="home-butons">
-                <button 
-                  className="btn btnn-primary"
-                  onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}
-                >
+
+            {/* TEXT */}
+            <motion.div
+              className="home-text"
+              variants={textContainer}
+              initial="hidden"
+              animate="visible"
+            >
+              <motion.h1 variants={textItem}>
+               <span className="highlight">Hello, I'm Jyoti Sah</span>
+              </motion.h1>
+
+              <motion.h2
+                variants={textItem}
+                style={{ fontStyle: "italic", marginTop: "0" }}
+              >
+                Full Stack Developer
+              </motion.h2>
+              <motion.p variants={textItem} style={{ textAlign: 'justify' }}>
+I am a passionate Full Stack Developer who enjoys building modern, scalable, and user‑friendly web applications. Comfortable working across both frontend and backend, I develop complete end‑to‑end solutions with a focus on clean, efficient, and maintainable code—always following best practices. Driven by curiosity and creativity, I thrive on solving real‑world problems through thoughtful technology.
+</motion.p>
+
+              <motion.div className="home-butons" variants={textItem}>
+                <button className="btnn btnn-primary">
                   View My Work
                 </button>
-                <button 
-                  className="btn btnn-secondary"
-                  onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
-                >
+                <button className="btnn btnn-secondary">
                   Contact Me
                 </button>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
+
+            {/* IMAGE */}
             <div className="home-image">
-              <div className="profile-image">
-                <img 
-                  src={me} 
-                  alt="Jyoti Sah" 
-                  onError={handleImageError}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Chatbot Widget */}
-        <div className={`chatbot-widget ${chatOpen ? 'open' : ''}`}>
-          {/* Chatbot Toggle Button */}
-          <button 
-            className="chatbot-toggle"
-            onClick={() => setChatOpen(!chatOpen)}
-          >
-            {chatOpen ? '✕' : '💬'}
-            <span className="chatbot-badge">Chat</span>
-          </button>
-
-          {/* Chat Window */}
-          <div className="chatbot-window">
-            <div className="chatbot-header">
-              <div className="chatbot-avatar">
-                <span>JS</span>
-              </div>
-              <div className="chatbot-info">
-                <h3>Jyoti Sah</h3>
-                <p>Full Stack Developer</p>
-              </div>
-              <button 
-                className="chatbot-close"
-                onClick={() => setChatOpen(false)}
+              <motion.div
+                className="profile-image"
+                initial={{ opacity: 0, scale: 0.85, y: 40 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                whileHover={{ scale: 1.05 }}
               >
-                ✕
-              </button>
+                <img src={me} alt="Jyoti Sah" />
+              </motion.div>
             </div>
 
-            <div className="chatbot-messages">
-              {messages.map(message => (
-                <div 
-                  key={message.id} 
-                  className={`message ${message.sender}`}
-                >
-                  <div className="message-content">
-                    <p>{message.text}</p>
-                    <span className="message-time">
-                      {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                    </span>
-                  </div>
-                </div>
-              ))}
-              {isTyping && (
-                <div className="message bot typing">
-                  <div className="message-content">
-                    <div className="typing-indicator">
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                    </div>
-                  </div>
-                </div>
-              )}
-              <div ref={messagesEndRef} />
-            </div>
-
-            <form className="chatbot-input" onSubmit={handleSendMessage}>
-              <input
-                type="text"
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-                placeholder="Type your message..."
-                disabled={isTyping}
-              />
-              <button 
-                type="submit"
-                disabled={isTyping || !inputMessage.trim()}
-              >
-                <span className="send-icon">➤</span>
-              </button>
-            </form>
           </div>
         </div>
       </section>
-      <About/>
-      <Skill/>
-      <Projects/>
-      <Contact/>
+
+      <About />
+      <Skill />
+      <Projects />
+      <Contact />
       <Footer />
     </>
   );

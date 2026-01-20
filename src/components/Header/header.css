@@ -40,14 +40,15 @@
 
 .logo-image {
   height: 60px; /* Bigger than original (was 50px) */
-  width: auto;
+  width: 60px;
   object-fit: contain;
   transition: all 0.4s ease;
   border-radius: 8px;
   padding: 4px;
+  object-fit: cover;
   background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(155, 89, 182, 0.15));
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.2); /* Subtle glow even when not scrolled */
+  border: 0px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.2); 
 }
 
 .logo-image:hover {
@@ -116,11 +117,8 @@
   display: flex;
   list-style: none;
   gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
   padding: 0.5rem;
   border-radius: 15px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-link {
@@ -160,9 +158,8 @@
 }
 
 .nav-link.active {
-  background: linear-gradient(135deg, #3498db, #2980b9);
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.2), #2980b9);
   color: #ffffff;
-  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
   transform: translateY(-1px);
 }
 

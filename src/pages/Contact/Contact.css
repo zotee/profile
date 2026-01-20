@@ -1,6 +1,6 @@
 /* src/components/Contact.css */
 .contact {
-  padding: 120px 0 80px;
+  padding: 30px;
   background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
   min-height: 100vh;
   position: relative;
@@ -21,7 +21,7 @@
   pointer-events: none;
 }
 
-.container {
+.contaiiner {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
@@ -91,7 +91,7 @@
 
 .contact-info h3 {
   font-size: 2rem;
-  color: #2c3e50;
+  color: #57291f;
   margin-bottom: 20px;
   font-weight: 700;
 }
@@ -135,7 +135,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #3498db, #2980b9);
+  background: linear-gradient(135deg, #e77577, #2980b9);
   color: white;
   border-radius: 50%;
   flex-shrink: 0;
@@ -156,7 +156,7 @@
 
 .contact-text span {
   font-size: 1.1rem;
-  color: #3498db;
+  color: #808080;
   font-weight: 500;
 }
 
@@ -227,10 +227,10 @@
   color: #95a5a6;
 }
 
-.btn-primary {
+.btnnn-primary {
   width: 100%;
   padding: 18px 30px;
-  background: linear-gradient(135deg, #3498db, #2980b9);
+  background: linear-gradient(135deg, #e77577, #2980b9);
   color: white;
   border: none;
   border-radius: 12px;
@@ -243,13 +243,13 @@
   flex-shrink: 0; /* Prevent button from shrinking */
 }
 
-.btn-primary:hover {
+.btnnn-primary:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
-  background: linear-gradient(135deg, #2980b9, #1c5a7c);
+  background: linear-gradient(135deg, #e77577, #1c5a7c);
 }
 
-.btn-primary:active {
+.btnnn-primary:active {
   transform: translateY(-1px);
 }
 
@@ -284,9 +284,9 @@
 }
 
 @media (max-width: 992px) {
-  .contact {
+  /* .contact {
     padding: 80px 0 40px;
-  }
+  } */
   
   .title-text {
     font-size: 2.8rem;
@@ -346,10 +346,10 @@
     gap: 15px;
   }
   
-  .form-group input,
+  /* .form-group input,
   .form-group textarea {
     padding: 15px;
-  }
+  } */
   
   .contact-form .form-group:nth-of-type(3) textarea {
     min-height: 150px;

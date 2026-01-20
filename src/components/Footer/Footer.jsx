@@ -11,8 +11,7 @@ const Footer = () => {
           <div className="footer-logo">
             <div className="logo-shape">
               <div className="logo-inner">
-                <span className="logo-j">J</span>
-                <span className="logo-s">S</span>
+            
               </div>
               <div className="logo-dot"></div>
             </div>

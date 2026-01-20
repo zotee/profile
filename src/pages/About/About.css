@@ -1,10 +1,15 @@
 /* src/components/About.css */
 .about {
-  padding: 100px 0;
+  padding: 30px;
   background: #f8f9fa;
   min-height: 100vh;
   position: relative;
   overflow: hidden;
+}
+.about-teext {
+  text-align: justify;
+ 
+  max-width: 720px;
 }
 
 .about::before {
@@ -61,18 +66,18 @@
 }
 
 .about-text p {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   font-size: 1.2rem;
-  line-height: 1.8;
+  line-height: 1.2;
   color: #2c3e50;
   font-weight: 400;
 }
 
 .about-details {
-  margin-top: 3rem;
+  margin-top: 1rem;
   background: white;
   border-radius: 16px;
-  padding: 2rem;
+  padding: 1rem;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
 }
 
@@ -94,7 +99,7 @@
 }
 
 .detail-item span {
-  color: #3498db;
+  color:  #808080;
   font-weight: 500;
   font-size: 1.1rem;
 }
@@ -107,11 +112,12 @@
 .stat {
   text-align: center;
   padding: 3rem 2rem;
-  background: white;
+  background: #f39c12;
   border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.08);
   transition: all 0.3s ease;
 }
+
 
 .stat:hover {
   transform: translateY(-8px);
@@ -120,7 +126,7 @@
 
 .stat h3 {
   font-size: 3.5rem;
-  background: linear-gradient(45deg, #3498db, #2980b9);
+  background: linear-gradient(45deg,  #f0f4ff,  #f0f4ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

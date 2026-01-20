@@ -1,6 +1,6 @@
 /* src/components/Projects.css */
 .projects {
-  padding: 120px 0 80px;
+  padding: 30px;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   min-height: 100vh;
   position: relative;
@@ -59,7 +59,7 @@
   font-size: 1.2rem;
   color: #666;
   max-width: 600px;
-  /* margin: 0 auto 20px; */
+  margin: 0 auto 20px;
   line-height: 1.4;
   font-weight: 400;
 }

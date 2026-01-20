@@ -54,4 +54,8 @@
     background: #3498db;
     color: white;
   }
-  
+/* Global styles or App.css */
+.App {
+  padding-top: 80px; /* Adjust based on your header height */
+  min-height: 100vh;
+}
