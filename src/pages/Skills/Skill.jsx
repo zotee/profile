@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import './Skill.css';
 import Header from '../../components/Header/Header';
 
-
 /* ================= FRAMER MOTION VARIANTS ================= */
 
 const sectionVariant = {
@@ -45,13 +44,20 @@ const Skills = () => {
   const skills = [
     { name: 'HTML/CSS', level: 90, color: '#FF6B6B', icon: '💻', category: 'Frontend' },
     { name: 'JavaScript', level: 85, color: '#FFD166', icon: '⚡', category: 'Frontend' },
+    { name: 'TypeScript', level: 70, color: '#3178C6', icon: '📘', category: 'Frontend' },
     { name: 'React', level: 75, color: '#7209B7', icon: '⚛️', category: 'Frontend' },
     { name: 'Node.js', level: 75, color: '#06D6A0', icon: '🟢', category: 'Backend' },
+    { name: 'Express.js', level: 70, color: '#68A063', icon: '🚂', category: 'Backend' },
     { name: 'Python', level: 60, color: '#073B4C', icon: '🐍', category: 'Backend' },
-    { name: 'MongoDB', level: 90, color: '#4ECDC4', icon: '🍃', category: 'Backend' },
+    { name: 'MongoDB', level: 90, color: '#4ECDC4', icon: '🍃', category: 'Database' },
+    { name: 'MySQL', level: 70, color: '#4479A1', icon: '🐬', category: 'Database' },
+    { name: 'ERP Systems', level: 40, color: '#FF9A00', icon: '🏢', category: 'Business' },
     { name: 'Git & GitHub', level: 90, color: '#EF476F', icon: '📂', category: 'Tools' },
     { name: 'Dotnet', level: 40, color: '#118AB2', icon: '🔷', category: 'Learning' },
   ];
+
+  // Group skills by category for organization
+  const categories = [...new Set(skills.map(skill => skill.category))];
 
   return (
     <>
@@ -72,6 +78,7 @@ const Skills = () => {
             <span className="title-underline"></span>
           </motion.h2>
 
+        
           {/* SKILLS GRID */}
           <div className="skills-container">
             <motion.div className="skills-details">
@@ -89,7 +96,10 @@ const Skills = () => {
                   {/* HEADER */}
                   <div className="skill-card-header">
                     <span className="skill-card-icon">{skill.icon}</span>
-                    <span className="skill-card-name">{skill.name}</span>
+                    <div>
+                      <span className="skill-card-name">{skill.name}</span>
+                      <div className="skill-category-badge">{skill.category}</div>
+                    </div>
                   </div>
 
                   {/* PROGRESS */}
@@ -129,11 +139,9 @@ const Skills = () => {
             </motion.div>
           </div>
 
-       
+        
         </div>
       </motion.section>
-
-    
     </>
   );
 };

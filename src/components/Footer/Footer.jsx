@@ -1,6 +1,7 @@
 // src/components/Footer.jsx
 import React from 'react';
 import './Footer.css';
+import logo from "../../assets/me.jpeg";
 
 const Footer = () => {
   return (
@@ -9,13 +10,23 @@ const Footer = () => {
         <div className="footer-content">
           {/* Logo Section */}
           <div className="footer-logo">
-            <div className="logo-shape">
-              <div className="logo-inner">
-            
-              </div>
-              <div className="logo-dot"></div>
+            <div className="footer-logo-image-container">
+              <img 
+                src={logo} 
+                alt="Jyoti Sah Logo" 
+                className="footer-logo-image"
+                onError={(e) => {
+                  console.error('Footer logo image failed to load');
+                  e.target.style.display = 'none';
+                  e.target.parentNode.innerHTML = `
+                    <div class="footer-logo-fallback">
+                      JS
+                    </div>
+                  `;
+                }}
+              />
             </div>
-            <div className="logo-text">
+            <div className="footer-logo-text">
               <span className="logo-name">Jyoti Sah</span>
               <span className="logo-tagline">Full Stack Developer</span>
             </div>
@@ -43,7 +54,7 @@ const Footer = () => {
             </a>
             <a href="https://x.com/___ehsaas___" target="_blank" rel="noopener noreferrer" className="social-link">
               <svg className="social-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214 6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
               </svg>
               Twitter
             </a>

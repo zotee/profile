@@ -1,4 +1,3 @@
-// src/components/Contact.jsx
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import './Contact.css';
@@ -47,19 +46,14 @@ const slideRight = {
   },
 };
 
-const itemHover = {
-  hover: {
-    y: -5,
-    transition: { duration: 0.3, ease: 'easeOut' },
-  },
-};
-
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   });
+  const [result, setResult] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -68,11 +62,45 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! I will get back to you soon.');
-    setFormData({ name: '', email: '', message: '' });
+    setIsSubmitting(true);
+    setResult('Sending...');
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('name', formData.name);
+    formDataToSend.append('email', formData.email);
+    formDataToSend.append('message', formData.message);
+    
+    // Add your Web3Forms access key here
+    formDataToSend.append("access_key", "499e2f5a-8d4a-47e4-82f1-b0ffc86b07ae");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formDataToSend
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult('Form Submitted Successfully! I will get back to you soon.');
+        setFormData({ name: '', email: '', message: '' });
+        
+        // Clear success message after 5 seconds
+        setTimeout(() => {
+          setResult('');
+        }, 5000);
+      } else {
+        console.log("Error", data);
+        setResult(data.message || 'Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      setResult('Network error. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -133,9 +161,9 @@ const Contact = () => {
                     className="contact-item"
                     key={index}
                     variants={fadeUp}
-                    whileHover="hover"
                     initial="hidden"
                     animate="visible"
+                    whileHover={{ y: -3 }}
                   >
                     <div className="contact-icon">{item.icon}</div>
                     <div className="contact-text">
@@ -161,6 +189,7 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
                 />
               </motion.div>
 
@@ -172,6 +201,7 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
                 />
               </motion.div>
 
@@ -183,17 +213,29 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
                 ></textarea>
               </motion.div>
 
               <motion.button
                 type="submit"
                 className="btn btnnn-primary"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                disabled={isSubmitting}
+                whileHover={!isSubmitting ? { scale: 1.05 } : {}}
+                whileTap={!isSubmitting ? { scale: 0.95 } : {}}
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </motion.button>
+
+              {result && (
+                <motion.div 
+                  className="result-message"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  {result}
+                </motion.div>
+              )}
             </motion.form>
           </div>
         </div>

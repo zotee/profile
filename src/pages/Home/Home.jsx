@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import "./Home.css";
@@ -29,43 +30,6 @@ const textItem = {
 };
 
 const Home = () => {
-  const [chatOpen, setChatOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    { id: 1, text: "Hi! I'm Jyoti. How can I help you today?", sender: "bot", timestamp: new Date() }
-  ]);
-  const [inputMessage, setInputMessage] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef(null);
-
-  const handleSendMessage = (e) => {
-    e.preventDefault();
-    if (!inputMessage.trim()) return;
-
-    setMessages(prev => [...prev, {
-      id: prev.length + 1,
-      text: inputMessage,
-      sender: "user",
-      timestamp: new Date()
-    }]);
-
-    setInputMessage("");
-    setIsTyping(true);
-
-    setTimeout(() => {
-      setMessages(prev => [...prev, {
-        id: prev.length + 1,
-        text: "Thanks for your message! Let's connect soon.",
-        sender: "bot",
-        timestamp: new Date()
-      }]);
-      setIsTyping(false);
-    }, 1200);
-  };
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
   return (
     <>
       <Header />
@@ -84,6 +48,7 @@ const Home = () => {
               <motion.h1 variants={textItem}>
                <span className="highlight">Hello, I'm Jyoti Sah</span>
               </motion.h1>
+             
 
               <motion.h2
                 variants={textItem}
@@ -92,16 +57,20 @@ const Home = () => {
                 Full Stack Developer
               </motion.h2>
               <motion.p variants={textItem} style={{ textAlign: 'justify' }}>
-I am a passionate Full Stack Developer who enjoys building modern, scalable, and user‑friendly web applications. Comfortable working across both frontend and backend, I develop complete end‑to‑end solutions with a focus on clean, efficient, and maintainable code—always following best practices. Driven by curiosity and creativity, I thrive on solving real‑world problems through thoughtful technology.
+              I build digital experiences from the ground up. As a Full Stack Developer, I thrive where frontend creativity meets backend logic-crafting complete, scalable applications that deliver exceptional user value. My approach blends meticulous attention to code quality with a passion for solving real problems, ensuring every project is not just functional, but thoughtfully engineered for lasting impact.
 </motion.p>
 
               <motion.div className="home-butons" variants={textItem}>
-                <button className="btnn btnn-primary">
-                  View My Work
-                </button>
-                <button className="btnn btnn-secondary">
-                  Contact Me
-                </button>
+                <Link to="/projects">
+                  <button className="btnn btnn-primary">
+                    View My Work
+                  </button>
+                </Link>
+                <Link to="/contact">
+                  <button className="btnn btnn-secondary">
+                    Contact Me
+                  </button>
+                </Link>
               </motion.div>
             </motion.div>
 
