@@ -1,9 +1,20 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script type="module">
+      import { injectIntoGlobalHook } from "/@react-refresh";
+      injectIntoGlobalHook(window);
+      window.$RefreshReg$ = () => {};
+      window.$RefreshSig$ = () => (type) => type;
+    </script>
+
+    <script type="module" src="/@vite/client"></script>
+
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/src/assets/mee.jpeg
-    " />
+    
+    <!-- Fixed icon link -->
+    <link rel="icon" type="image/jpeg" href="/src/assets/mee.jpeg" />
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jyoti Sah</title>
   </head>
