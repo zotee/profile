@@ -123,7 +123,7 @@ const About = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
                 >
-                  1+
+                  2+
                 </motion.h3>
                 <p>Years Experience</p>
               </motion.div>
