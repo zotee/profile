@@ -1,103 +1,76 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import "./Home.css";
 import About from "../About/About";
 import Skill from "../Skills/Skill";
 import Projects from "../Projects/Projects";
 import Contact from "../Contact/Contact";
 import me from "../../assets/me.jpeg";
+import "./Home.css";
 
-/* ================= ANIMATIONS ================= */
 
-const textContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 }
-  }
-};
-
-const textItem = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" }
-  }
-};
-
-const Home = () => {
+export default function Home() {
   return (
-    <>
+    <div className="portfolio">
       <Header />
 
-      <section id="home" className="home">
-        <div className="container">
+      <main>
+        <section id="home" className="home section-shell">
           <div className="home-content">
+            <p className="availability">
+              <span className="status-dot" aria-hidden="true" />
+              Available for opportunities
+            </p>
 
-            {/* TEXT */}
-            <motion.div
-              className="home-text"
-              variants={textContainer}
-              initial="hidden"
-              animate="visible"
-            >
-              <motion.h1 variants={textItem}>
-               <span className="highlight">Hello, I'm Jyoti Sah</span>
-              </motion.h1>
-             
+            <p className="home-intro">Hello, I’m Jyoti Sah</p>
 
-              <motion.h2
-                variants={textItem}
-                style={{ fontStyle: "italic", marginTop: "0" }}
-              >
-                Full Stack Developer
-              </motion.h2>
-              <motion.p variants={textItem} style={{ textAlign: 'justify' }}>
-              I build digital experiences from the ground up. As a Full Stack Developer, I thrive where frontend creativity meets backend logic-crafting complete, scalable applications that deliver exceptional user value. My approach blends meticulous attention to code quality with a passion for solving real problems, ensuring every project is not just functional, but thoughtfully engineered for lasting impact.
-</motion.p>
+            <h1>
+              I build digital products
+              <span> from idea to launch.</span>
+            </h1>
 
-              <motion.div className="home-butons" variants={textItem}>
-                <Link to="/projects">
-                  <button className="btnn btnn-primary">
-                    View My Work
-                  </button>
-                </Link>
-                <Link to="/contact">
-                  <button className="btnn btnn-secondary">
-                    Contact Me
-                  </button>
-                </Link>
-              </motion.div>
-            </motion.div>
+            <p className="hero-copy">
+              I’m a full stack developer in Kathmandu, Nepal. I create
+              intuitive interfaces, dependable APIs, and practical solutions
+              that make people’s work easier.
+            </p>
 
-            {/* IMAGE */}
-            <div className="home-image">
-              <motion.div
-                className="profile-image"
-                initial={{ opacity: 0, scale: 0.85, y: 40 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                whileHover={{ scale: 1.05 }}
-              >
-                <img src={me} alt="Jyoti Sah" />
-              </motion.div>
+            <div className="hero-actions">
+              <a className="action action-primary" href="#projects">
+                View my work <span aria-hidden="true">↗</span>
+              </a>
+              <a className="action action-outline" href="#contact">
+                Get in touch
+              </a>
             </div>
 
+            <p className="hero-specialties">
+              React <span>·</span> Node.js <span>·</span> MongoDB
+            </p>
           </div>
-        </div>
-      </section>
 
-      <About />
-      <Skill />
-      <Projects />
-      <Contact />
-      <Footer />
-    </>
+          <div className="home-visual">
+            <div className="portrait-frame">
+              <img src={me} alt="Jyoti Sah" />
+            </div>
+            <div className="portrait-caption">
+              <span className="caption-mark" aria-hidden="true">✳</span>
+              <div>
+                <strong>Design meets development.</strong>
+                <span>Thoughtful details, built to work.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      
+
+        <About />
+        <Skill />
+        <Projects />
+        <Contact />
+   
+      </main>
+
+    </div>
   );
-};
-
-export default Home;
+}

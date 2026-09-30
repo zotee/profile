@@ -1,145 +1,29 @@
-// src/components/Header.jsx
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import './Header.css';
-import logoImage from '../../assets/diya.jpeg'; // Adjust the path based on your file structure
+import React, { useEffect, useState } from "react";
+import "./Header.css";
 
-const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
+const links = ["home", "about", "skills", "projects", "contact"];
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-
-  const isActiveLink = (path) => {
-    return location.pathname === path;
-  };
-
-  // Check if current page is home page
-  const isHomePage = location.pathname === '/';
-
+export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [active, setActive] = useState("home");
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      if (isHomePage) {
-        if (scrollTop > 100) {
-          setIsScrolled(true);
-        } else {
-          setIsScrolled(false);
-        }
-      } else {
-        setIsScrolled(true);
-      }
-    };
-
-    if (!isHomePage) {
-      setIsScrolled(true);
-    }
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isHomePage]);
-
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => entry.isIntersecting && setActive(entry.target.id)),
+      { rootMargin: "-35% 0px -55% 0px" }
+    );
+    links.forEach((id) => { const el = document.getElementById(id); if (el) observer.observe(el); });
+    return () => observer.disconnect();
+  }, []);
   return (
-    <header className={`header ${isScrolled ? 'scrolled' : ''} ${isMenuOpen ? 'menu-open' : ''}`}>
-      <div className="container">
-        <div className="logo">
-          <Link to="/" onClick={closeMenu}>
-            <div className="logo-container">
-              <img 
-                src={logoImage} 
-                alt="Jyoti Sah Logo" 
-                className="logo-image"
-                onError={(e) => {
-                  console.error('Logo image failed to load');
-                  e.target.style.display = 'none';
-                  // Fallback to text if image fails
-                  e.target.parentNode.innerHTML = `
-                    <div class="logo-fallback">
-                      <span class="logo-j">Jyoti</span>
-                      <span class="logo-sah">Sah</span>
-                    </div>
-                  `;
-                }}
-              />
-            </div>
-          </Link>
-        </div>
-        
-        <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>
-          <ul className="nav-list">
-            <li>
-              <Link 
-                to="/" 
-                className={`nav-link ${isActiveLink('/') ? 'active' : ''}`}
-                onClick={closeMenu}
-              >
-                <span className="nav-icon">🏠</span>
-                <span className="nav-text">Home</span>
-                <span className="nav-underline"></span>
-              </Link>
-            </li>
-            <li>
-              <Link 
-                to="/about" 
-                className={`nav-link ${isActiveLink('/about') ? 'active' : ''}`}
-                onClick={closeMenu}
-              >
-                <span className="nav-icon">👤</span>
-                <span className="nav-text">About</span>
-                <span className="nav-underline"></span>
-              </Link>
-            </li>
-            <li>
-              <Link 
-                to="/skills" 
-                className={`nav-link ${isActiveLink('/skills') ? 'active' : ''}`}
-                onClick={closeMenu}
-              >
-                <span className="nav-icon">⚡</span>
-                <span className="nav-text">Skills</span>
-                <span className="nav-underline"></span>
-              </Link>
-            </li>
-            <li>
-              <Link 
-                to="/projects" 
-                className={`nav-link ${isActiveLink('/projects') ? 'active' : ''}`}
-                onClick={closeMenu}
-              >
-                <span className="nav-icon">💼</span>
-                <span className="nav-text">Projects</span>
-                <span className="nav-underline"></span>
-              </Link>
-            </li>
-            <li>
-              <Link 
-                to="/contact" 
-                className={`nav-link ${isActiveLink('/contact') ? 'active' : ''}`}
-                onClick={closeMenu}
-              >
-                <span className="nav-icon">📞</span>
-                <span className="nav-text">Contact</span>
-                <span className="nav-underline"></span>
-              </Link>
-            </li>
-          </ul>
+    <header className="site-header">
+      <div className="header-inner">
+        <a className="brand" href="#home" onClick={() => setMenuOpen(false)}><span className="brand-dot" /> JYOTI <span>// DEV</span></a>
+        <button className="nav-toggle" type="button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="primary-nav" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? "CLOSE ×" : " ☰"}</button>
+        <nav id="primary-nav" className={menuOpen ? "site-nav nav-open" : "site-nav"} aria-label="Main navigation">
+          {links.map((id) => <a key={id} className={active === id ? "active" : ""} href={`#${id}`} onClick={() => setMenuOpen(false)}>{id.toUpperCase()}</a>)}
         </nav>
-
-        <button className={`menu-toggle ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+        <a className="header-cta" href="mailto:jyotishahqwerty@gmail.com">LET’S TALK ↗</a>
       </div>
     </header>
   );
-};
-
-export default Header;
+}
